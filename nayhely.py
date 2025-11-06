@@ -1,31 +1,33 @@
-# nayhely.py
+# nayhely.py (VERSION CON FLASK PARA DESPLIEGUE EN RENDER)
 
+from flask import Flask
 from datetime import datetime
 
-# Variable que identifica tu taller
-TALLER_NOMBRE = "Taller de Contenedores de Nayhely Valle"
+# La aplicación Flask se inicializa aquí
+app = Flask(__name__)
 
-def saludar_y_mostrar_info():
-    """
-    Función que imprime información de bienvenida y datos del sistema.
-    """
-    
-    # Imprime un separador
-    print("-" * 40)
-    
-    # Imprime el nombre de la tarea
-    print(f"👋 ¡Hola! Este es mi {TALLER_NOMBRE}")
-    
-    # Obtiene e imprime la fecha y hora actual
-    ahora = datetime.now()
-    print(f"La fecha y hora actual del contenedor es: {ahora.strftime('%Y-%m-%d %H:%M:%S')}")
-    
-    # Imprime el mensaje de éxito
-    print("✅ El script Python se ha ejecutado con éxito dentro del contenedor Docker.")
-    
-    # Imprime un separador
-    print("-" * 40)
+# Definimos el puerto que Render usará
+PORT = 10000
 
-# El punto de entrada principal del script
+@app.route("/")
+def home():
+    """Ruta principal que muestra el mensaje del taller."""
+    
+    # Crea el mensaje HTML
+    html_content = f"""
+    <html>
+    <head><title>Taller Nayhely Valle - Flask</title></head>
+    <body>
+        <h1>👋 ¡Hola! Este es mi Taller de Contenedores con Flask</h1>
+        <p>El framework web usado es: **Flask** (v2.2.5, según requirements.txt)</p>
+        <p>La fecha y hora actual del contenedor es: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+        <p>✅ El servicio Docker está funcionando correctamente en Render.</p>
+    </body>
+    </html>
+    """
+    return html_content
+
 if __name__ == "__main__":
-    saludar_y_mostrar_info()
+    # Flask sirve la aplicacion, escuchando en el puerto 10000
+    print(f"Flask App iniciada en el puerto {PORT}")
+    app.run(host='0.0.0.0', port=PORT)

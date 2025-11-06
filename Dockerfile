@@ -10,17 +10,16 @@ LABEL maintainer="Nayhely Valle"
 WORKDIR /app
 
 # --- PASOS DE INSTALACIÓN DE DEPENDENCIAS ---
-# 4. Copiamos el archivo de dependencias (aunque esté vacío)
+# 4. Copiamos el archivo de dependencias (ahora con Flask)
 COPY requirements.txt .
 
-# 5. Instalamos las dependencias. El flag --no-cache-dir reduce el tamaño.
+# 5. Instalamos las dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
 # --- PASOS DE COPIA DE LA APLICACIÓN ---
-# 6. Copiamos los archivos de la aplicación y el workflow
+# 6. Copiamos los archivos de la aplicación
 COPY nayhely.py .
-COPY nayhelyvalle.yml .
-# Nota: No necesitamos copiar la carpeta .github/workflows en el contenedor final.
 
 # 7. Comando por defecto al ejecutar el contenedor
+# Ejecutamos el script de Python que inicia Flask
 CMD ["python", "nayhely.py"]

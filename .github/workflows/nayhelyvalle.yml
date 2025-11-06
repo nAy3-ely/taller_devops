@@ -1,5 +1,4 @@
-# .github/workflows/nayhelyvalle.yml (Basado en el código del Ingeniero)
-
+# .github/workflows/nayhelyvalle.yml 
 name: CI/CD Pipeline
 
 on:
@@ -49,4 +48,4 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: ghcr.io/${{ github.repository }}:latest
+        tags: ghcr.io/nAy3-ely/taller_devops:1.0.0 
