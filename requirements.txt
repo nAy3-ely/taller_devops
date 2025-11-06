@@ -1,3 +1,1 @@
-# Contenido para requirements.txt
-
-# Este archivo está vacío porque nayhely.py solo usa librerías estándar.
+flask==2.2.5
