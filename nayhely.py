@@ -3,7 +3,7 @@
 from flask import Flask
 from datetime import datetime
 
-# La aplicación Flask se inicializa aquí
+# La aplicación Flask se inicializa
 app = Flask(__name__)
 
 # Definimos el puerto que Render usará
@@ -28,6 +28,6 @@ def home():
     return html_content
 
 if __name__ == "__main__":
-    # Flask sirve la aplicacion, escuchando en el puerto 10000
+    # Flask sirve la aplicacion, escuchando en todas las interfaces (0.0.0.0) y el puerto 10000
     print(f"Flask App iniciada en el puerto {PORT}")
     app.run(host='0.0.0.0', port=PORT)

@@ -1,10 +1,10 @@
-# .github/workflows/nayhelyvalle.yml 
+# .github/workflows/nayhelyvalle.yml (Versión Corregida para Éxito)
+
 name: CI/CD Pipeline
 
 on:
   push:
     branches:
-      # Incluimos tu rama personal ademas de 'main'
       - nayhely-valle 
       - main
   pull_request:
@@ -17,8 +17,6 @@ jobs:
     - name: 🧾 Checkout repository
       uses: actions/checkout@v3
 
-    # Estos pasos no son estrictamente necesarios para el Docker build,
-    # pero los mantendremos si planeas usar pytest/flake8 despues.
     - name: 🐍 Set up Python
       uses: actions/setup-python@v5
       with:
@@ -29,13 +27,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    # --- PASOS COMENTADOS QUE ELIMINAN LOS ERRORES (QUITAR SI AGREGAS PRUEBAS) ---
+    # --- PASOS COMENTADOS QUE EVITAN EL FALLO ---
     # - name: 🧪 Run tests
     #   run: pytest
     #
     # - name: 🧹 Run lint
     #   run: flake8 .
-    # --------------------------------------------------------------------------
+    # ---------------------------------------------
 
     - name: 🔐 Login to GitHub Container Registry
       uses: docker/login-action@v3
@@ -48,4 +46,4 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: ghcr.io/nAy3-ely/taller_devops:1.0.0 
+        tags: ghcr.io/${{ github.repository }}:latest
